@@ -11,7 +11,7 @@ namespace Exercise
     {
         static void Main(string[] args)
         {
-            Encrypt("EXPERIENCE IS THE TEACHER OF ALL THINGS", 4);
+            Encrypt("Experience is the teacher of all things...", 4);
         }
         
         public static void Encrypt(string text, int key)
