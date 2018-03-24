@@ -20,25 +20,41 @@ namespace Exercise
 
             for (int i = 0, textLength = text.Length; i < textLength; i++)
             {
-                char letter = (!Char.IsWhiteSpace(text[i])) ? (char)(text[i] + key) : (char)(text[i]);
-                int number = (int)letter;
+                char letter;
+                int letterToNumber;
 
-                if (number < 65)
+                if (Char.IsLetter(text[i]) && Char.IsLower(text[i]))
                 {
-                    if (number == 32)
-                    { // if that's a space
-                        number += 0;
-                    }
-                    else
-                    {
-                        number += 26;
-                    }
+                    letter = (char)(text[i] + key);
+                    letterToNumber = (int)letter;
+                    
+                    if (letterToNumber < 101) // 'a'
+                        letterToNumber += 26;
+                    if (letterToNumber == 124) // '|'
+                        letterToNumber -= 26;
+
+                    if (letterToNumber > 126)
+                        letterToNumber -= 26;
                 }
-                
-                if (number > 90)
-                    number -= 26;
-                
-                char l = (char)number;
+                else if (Char.IsLetter(text[i]) && Char.IsUpper(text[i]))
+                {
+                    letter = (char)(text[i] + key);
+                    letterToNumber = (int)letter;
+
+                    if (letterToNumber < 65) // 'A'
+                        letterToNumber += 26;
+
+                    if (letterToNumber > 90) // 'Z'
+                        letterToNumber -= 26;
+                }
+                else
+                {
+                    letter = (char)(text[i]);
+                    letterToNumber = (int)letter;
+                    letterToNumber += 0;
+                }
+
+                char l = (char)letterToNumber;
                 result += l.ToString();
             }
 
